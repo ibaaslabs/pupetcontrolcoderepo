@@ -42,23 +42,21 @@ node client1.puppettestlab.local {
 
 #Installing Docker pulling and running 
 
-#  include 'docker'
+  include 'docker'
 
-#  docker::image {'ubuntu':
-#	  ensure => 'present',
-#	  image_tag => 'trusty',
-#	  docker_file => '/tmp/Dockerfile',
-#	        }
+  docker::image {'ubuntu':
+	  image_tag => 'xenial',
+	        }
 
-#  docker::run {'Helloworld':
-#	   image => 'ubuntu'
-#      	   command => '/bin/sh -c "while true; do echo hello world; sleep 1; done"',  
-#               }
+  docker::run {'Helloworld':
+	   image => 'ubuntu'
+      	   command => '/bin/sh -c "while true; do echo hello world; sleep 1; done"',  
+               }
 
-#  docker::run {'Goodbyeworld':
-#	   image => 'ubuntu'
-#	   command => '/bin/sh -c "while true; do echo Goodbye world; sleep 1; done"',  
-#              }
+  docker::run {'Goodbyeworld':
+	   image => 'ubuntu'
+	   command => '/bin/sh -c "while true; do echo Goodbye world; sleep 1; done"',  
+              }
 
 
  } 
