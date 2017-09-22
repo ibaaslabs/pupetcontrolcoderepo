@@ -32,10 +32,31 @@ node default {
 
 node client1.puppettestlab.local {
 
-tomcat::install { '/opt/tomcat9':
-  source_url => 'https://www-us.apache.org/dist/tomcat/tomcat-9/v9.0.0.M26/bin/apache-tomcat-9.0.0.M26.tar.gz'
-}
-tomcat::instance { 'default':
-  catalina_home => '/opt/tomcat9',
-}
-}
+  tomcat::install { '/opt/tomcat9':
+          source_url => 'https://www-us.apache.org/dist/tomcat/tomcat-9/v9.0.0.M26/bin/apache-tomcat-9.0.0.M26.tar.gz'
+                  }
+
+  tomcat::instance { 'default':
+          catalina_home => '/opt/tomcat9',
+                   }
+
+#Installing Docker pulling and running 
+
+  include 'docker'
+
+  docker::image {'ubuntu':
+	  image_tag => 'xenial',
+	        }
+
+  docker::run {'Helloworld':
+	   image => 'ubuntu'
+      	   command => '/bin/sh -c "while true; do echo hello world; sleep 1; done"',  
+               }
+
+  docker::run {'Goodbyeworld':
+	   image => 'ubuntu'
+	   command => '/bin/sh -c "while true; do echo Goodbye world; sleep 1; done"',  
+              }
+
+
+ } 
